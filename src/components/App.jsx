@@ -1,7 +1,7 @@
 import "../styles/App.css";
 import { AppProvider } from "../context/AppContext";
-import Viewer from "../components/Viewer";
-import AnalysisPanel from "../components/AnalysisPanel";
+import Viewer from "./Viewer";
+import AnalysisPanel from "./AnalysisPanel";
 
 const App = () => (
   <AppProvider>

@@ -1,5 +1,5 @@
 import { useAppContext } from "../context/AppContext";
-import AnalyzeButton from "../components/AnalyzeButton";
+import AnalyzeButton from "./AnalyzeButton";
 import Upload from "./Upload";
 import Overlay from "./Overlay";
 import "../styles/Viewer.css";
