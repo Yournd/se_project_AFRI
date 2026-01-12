@@ -13,11 +13,20 @@
   min-width: 100vh;
   min-height: 100vh;
 }
-
 .app__title {
+  margin: 10px 20px;
+}
+
+.app__description {
+  margin-bottom: 15px;
+  width: 600px;
+}
+
+.app__title,
+.app__description {
   color: rgb(174, 204, 228);
   font-family: "Ubuntu";
-  margin: 20px 35px;
+  text-align: center;
 }
 
 .main__content {

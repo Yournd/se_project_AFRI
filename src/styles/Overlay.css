@@ -7,7 +7,6 @@
   opacity: 0.6;
 }
 
-/* Impact-specific styles */
 .overlay.impact-high {
   background-color: rgba(255, 0, 0, 0.18);
   border-color: rgba(255, 0, 0, 0.9);
@@ -23,7 +22,6 @@
   border-color: rgba(0, 160, 100, 0.9);
 }
 
-/* Active/highlighted style */
 .overlay.active {
   transform: scale(1.03);
   box-shadow: 0 0 0 5px rgba(255, 255, 255, 0.06) inset;

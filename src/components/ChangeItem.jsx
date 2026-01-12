@@ -6,10 +6,13 @@ const ChangeItem = ({ change }) => {
   const { highlightedChange, setHighlightedChange } = useAppContext();
 
   const isActive = highlightedChange === change.id;
+  const impactClass = change.accessibilityImpact
+    ? `impact-${String(change.accessibilityImpact).toLowerCase()}`
+    : "";
 
   return (
     <div
-      className={`change_items ${isActive ? "active" : ""}`}
+      className={`change_items ${isActive ? "active" : ""} ${impactClass}`}
       onMouseEnter={() => setHighlightedChange(change.id)}
       onMouseLeave={() => setHighlightedChange(null)}
     >
