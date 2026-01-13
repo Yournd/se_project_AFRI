@@ -2,6 +2,7 @@ import "../styles/App.css";
 import { AppProvider } from "../context/AppContext";
 import Viewer from "./Viewer";
 import AnalysisPanel from "./AnalysisPanel";
+import AnalysisNotesModal from "./AnalysisNotesModal";
 
 const App = () => (
   <AppProvider>
@@ -12,13 +13,14 @@ const App = () => (
           This is an AI Frontend Regression Inspector designed to allow
           developers to compare a baseline image with a new image and show UI
           changes that have been made and how they affect the overall
-          accessability of said UI. To use it, simply upload a baseline and a
+          accessibility of said UI. To use it, simply upload a baseline and a
           new image showing two different UI screenshots and hit run inspection.
         </p>
       </header>
       <div className="main__content">
         <Viewer />
         <AnalysisPanel />
+        <AnalysisNotesModal />
       </div>
     </div>
   </AppProvider>

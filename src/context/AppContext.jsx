@@ -2,6 +2,7 @@ import { createContext, useContext, useState } from "react";
 import { useEffect } from "react";
 
 import mockAnalysis from "../mocks/mockAnalysis";
+import test from "node:test";
 
 const USE_MOCK_ANALYSIS = false;
 
@@ -314,6 +315,7 @@ export const AppProvider = ({ children }) => {
             })
             .then((respJson) => {
               const text = respJson?.candidates?.[0]?.content?.parts?.[0]?.text;
+              console.log(text);
               if (!text) throw new Error("No model text candidate in response");
               let parsed;
               try {
