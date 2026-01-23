@@ -4,12 +4,12 @@ import { useEffect } from "react";
 import mockAnalysis from "../mocks/mockAnalysis";
 import test from "node:test";
 
-const USE_MOCK_ANALYSIS = true;
+const USE_MOCK_ANALYSIS = false;
 
 const AppContext = createContext();
 export const AppProvider = ({ children }) => {
   const [activeChangeId, setActiveChangeId] = useState(null);
-  const [isNotesModalOpen, setIsNotesModalOpen] = useState(false);
+  const [activeModal, setActiveModal] = useState("");
   const [isDragging, setDragging] = useState(false);
   const [baselineImage, setBaselineImage] = useState(null);
   const [newImage, setNewImage] = useState(null);
@@ -382,11 +382,9 @@ export const AppProvider = ({ children }) => {
 
   const activeChange = changes.find((change) => change.id === activeChangeId);
 
-  const openNotesModal = () => setIsNotesModalOpen(true);
+  const openActiveModal = (modal) => setActiveModal(modal);
 
-  const closeNotesModal = () => setIsNotesModalOpen(false);
-
-  const toggleNotesModal = () => setIsNotesModalOpen((prev) => !prev);
+  const closeActiveModal = () => setActiveModal("");
 
   const value = {
     baselineImage,
@@ -410,9 +408,9 @@ export const AppProvider = ({ children }) => {
     setDragging,
     isClientKeyPresent: Boolean(clientApiKey),
     isDev,
-    isNotesModalOpen,
-    openNotesModal,
-    closeNotesModal,
+    activeModal,
+    openActiveModal,
+    closeActiveModal,
   };
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };

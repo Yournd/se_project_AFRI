@@ -6,7 +6,7 @@ const ChangeItem = ({ change }) => {
   const {
     highlightedChange,
     setHighlightedChange,
-    openNotesModal,
+    openActiveModal,
     setActiveChangeId,
   } = useAppContext();
 
@@ -27,7 +27,8 @@ const ChangeItem = ({ change }) => {
           src={notesIcon}
           alt="Icon to access accessibility notes"
           onClick={() => {
-            (openNotesModal(), setActiveChangeId(change.id));
+            setActiveChangeId(change.id);
+            openActiveModal("notes");
           }}
         />
       )}

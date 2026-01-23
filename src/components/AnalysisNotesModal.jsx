@@ -2,16 +2,16 @@ import { useAppContext } from "../context/AppContext";
 import "../styles/AnalysisNotesModal.css";
 
 const AnalysisNotesModal = () => {
-  const { activeChange, setActiveChangeId, isNotesModalOpen, closeNotesModal } =
+  const { activeChange, setActiveChangeId, activeModal, closeActiveModal } =
     useAppContext();
 
-  if (!isNotesModalOpen) return null;
+  if (activeModal !== "notes") return null;
 
   return (
     <div
       className="analysis_modal_background"
       onClick={() => {
-        closeNotesModal();
+        closeActiveModal();
         setActiveChangeId(null);
       }}
     >
@@ -19,7 +19,7 @@ const AnalysisNotesModal = () => {
         <button
           className="analysis_modal__close_btn"
           onClick={() => {
-            closeNotesModal();
+            closeActiveModal();
             setActiveChangeId(null);
           }}
         >
@@ -41,18 +41,13 @@ const AnalysisNotesModal = () => {
         </button>
         <h3 className="analysis_modal__title">~Analysis Notes~</h3>
         <p className="analysis_modal__accessibility_note">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat.
-          {/* Accessibility Notes: {activeChange?.accessibilityNotes} */}
+          Accessibility Notes: {activeChange?.accessibilityNotes}
         </p>
         <p className="analysis_modal__recommended_fixes">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat.
-          {/* Recommended Fixes: {activeChange?.recommendedFixes} */}
+          Recommended Fixes: {activeChange?.recommendedFixes}
+        </p>
+        <p className="analysis_modal__mobile_impact">
+          Mobile Impact: {activeChange?.mobileImpact}
         </p>
       </div>
     </div>

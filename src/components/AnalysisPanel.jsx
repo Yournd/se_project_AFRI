@@ -3,7 +3,7 @@ import ChangeItem from "./ChangeItem";
 import "../styles/AnalysisPanel.css";
 
 const AnalysisPanel = () => {
-  const { changes, status } = useAppContext();
+  const { changes, status, openActiveModal } = useAppContext();
 
   if (status === "idle") return null;
   if (status === "analyzing")
@@ -14,10 +14,25 @@ const AnalysisPanel = () => {
     );
 
   return (
-    <div className="analysis_panel">
-      {changes?.map((change, i) => (
-        <ChangeItem key={change.id ?? i} change={change} />
-      ))}
+    <div className="analysis_panel__container">
+      <div className="grid__wrapper">
+        {changes?.map((change, i) => (
+          <ChangeItem
+            className="analysis_panel"
+            key={change.id ?? i}
+            change={change}
+          />
+        ))}
+      </div>
+      <button
+        className="summary__btn"
+        disabled={!changes || status === "analyzing"}
+        onClick={() => {
+          openActiveModal("summary");
+        }}
+      >
+        Click here for full summary!
+      </button>
     </div>
   );
 };

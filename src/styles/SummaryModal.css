@@ -1,4 +1,4 @@
-.analysis_modal_background {
+.summary_modal_background {
   background-color: rgba(0, 0, 0, 0.5);
   position: fixed;
   top: 0;
@@ -15,9 +15,8 @@
   cursor: pointer;
 }
 
-.analysis_modal {
+.summary_modal {
   position: relative;
-  height: 50%;
   width: 60%;
   border-radius: 12px;
   padding: 20px;
@@ -28,7 +27,7 @@
   font-weight: normal;
 }
 
-.analysis_modal__close_btn {
+.summary_modal__close_btn {
   position: absolute;
   top: 5px;
   right: 5px;
@@ -37,17 +36,41 @@
   cursor: pointer;
 }
 
-.analysis_modal__close_btn:hover svg {
+.summary_modal__close_btn:hover svg {
   opacity: 60%;
   transition: opacity 0.4s ease-out;
 }
 
-.analysis_modal__title {
+.summary_modal__title {
+  font-size: 22px;
   text-align: center;
   margin-bottom: 20px;
   border-bottom: 1px dotted rgb(40, 40, 40);
 }
 
-.analysis_modal__recommended_fixes {
-  margin: 20px 0 20px 0;
+.summary_modal__change_details {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.summary_modal__top_changes {
+  list-style-type: none;
+  margin-top: 10px;
+}
+
+.change__wrapper {
+  text-align: center;
+}
+
+.top_change {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0 10px 0;
+}
+
+.summary_modal__summary_text {
+  text-align: center;
+  max-width: 250px;
+  margin-top: 10px;
 }

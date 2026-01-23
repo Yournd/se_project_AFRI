@@ -4,6 +4,7 @@ import { AppProvider } from "../context/AppContext";
 import ImageCompareViewer from "./ImageCompareViewer";
 import AnalysisPanel from "./AnalysisPanel";
 import AnalysisNotesModal from "./AnalysisNotesModal";
+import SummaryModal from "./SummaryModal";
 
 const App = () => {
   useEffect(() => {
@@ -39,6 +40,7 @@ const App = () => {
           <ImageCompareViewer />
           <AnalysisPanel />
           <AnalysisNotesModal />
+          <SummaryModal />
         </div>
       </div>
     </AppProvider>
