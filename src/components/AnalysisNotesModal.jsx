@@ -2,53 +2,83 @@ import { useAppContext } from "../context/AppContext";
 import "../styles/AnalysisNotesModal.css";
 
 const AnalysisNotesModal = () => {
-  const { activeChange, setActiveChangeId, activeModal, closeActiveModal } =
-    useAppContext();
+  const { analysis, activeChange } = useAppContext();
 
-  if (activeModal !== "notes") return null;
-
+  const getMobileImpactColor = (mobileImpact) => {
+    if (mobileImpact === "High") return "#ef4444"; // red
+    if (mobileImpact === "Medium") return "#f59e0b"; // amber
+    if (mobileImpact === "Low") return "#10b981"; // green
+    return "transparent";
+  };
   return (
-    <div
-      className="analysis_modal_background"
-      onClick={() => {
-        closeActiveModal();
-        setActiveChangeId(null);
-      }}
-    >
-      <div className="analysis_modal">
-        <button
-          className="analysis_modal__close_btn"
-          onClick={() => {
-            closeActiveModal();
-            setActiveChangeId(null);
-          }}
-        >
+    <div className="analysis_modal">
+      <h3 className="analysis_modal__title">Inspector</h3>
+      <div className="change_details_container">
+        <p className="change_details_title">Change Details</p>
+        <ul className="change_details_list">
+          <li className="change_details_type">Type: {activeChange?.label}</li>
+          <li className="change_details_severity">
+            Severity: {activeChange?.uxImpact}
+          </li>
+          <li className="change_details_confidence">
+            Confidence: {activeChange?.confidence * 100}%
+          </li>
+        </ul>
+        <div className="analysis_container">
+          <p className="analysis_title">Analysis Description</p>
+          <p className="analysis">{activeChange?.description}</p>
+        </div>
+      </div>
+      {activeChange?.recommendedFixes ? (
+        <div className="recommended_fix_container">
+          <p className="recommended_fix_title">Recommended Fix</p>
+          <p className="recommended_fix">{activeChange?.recommendedFixes}</p>
+        </div>
+      ) : (
+        <></>
+      )}
+      {activeChange?.accessibilityNotes ? (
+        <div className="accessibility_notes_container">
+          <p className="accessibility_notes_title">Accessibility Notes</p>
+          <p className="accessibility_notes">
+            {activeChange?.accessibilityNotes}
+          </p>
+        </div>
+      ) : (
+        <></>
+      )}
+      <div className="mobile_impact_container">
+        <p className="mobile_impact_title">Mobile Impact</p>
+        <div className="mobile_impact_wrapper">
           <svg
-            width="30px"
-            height="30px"
+            width="40px"
+            height="40px"
             viewBox="0 0 24 24"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
-              d="M18 6L6 18M6 6L18 18"
-              stroke="currentColor"
-              strokeWidth="2"
+              d="M9 2C9 1.44772 9.44772 1 10 1H14C14.5523 1 15 1.44772 15 2V3C15 3.55228 14.5523 4 14 4H10C9.44772 4 9 3.55228 9 3V2Z"
+              fill={getMobileImpactColor(activeChange?.mobileImpact)}
+            />
+            <rect
+              x="5.75"
+              y="1.75"
+              width="12.5"
+              height="20.5"
+              rx="1.75"
+              stroke={getMobileImpactColor(activeChange?.mobileImpact)}
+              strokeWidth={1.5}
+            />
+            <path
+              d="M9 19.5H15"
+              stroke={getMobileImpactColor(activeChange?.mobileImpact)}
+              strokeWidth={1.5}
               strokeLinecap="round"
-              strokeLinejoin="round"
             />
           </svg>
-        </button>
-        <h3 className="analysis_modal__title">~Analysis Notes~</h3>
-        <p className="analysis_modal__accessibility_note">
-          Accessibility Notes: {activeChange?.accessibilityNotes}
-        </p>
-        <p className="analysis_modal__recommended_fixes">
-          Recommended Fixes: {activeChange?.recommendedFixes}
-        </p>
-        <p className="analysis_modal__mobile_impact">
-          Mobile Impact: {activeChange?.mobileImpact}
-        </p>
+          <p className="mobile_impact">{activeChange?.mobileImpact}</p>
+        </div>
       </div>
     </div>
   );

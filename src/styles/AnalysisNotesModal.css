@@ -1,53 +1,86 @@
-.analysis_modal_background {
-  background-color: rgba(0, 0, 0, 0.5);
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0 5px;
-  transition:
-    visibility 0s linear 0.5s,
-    opacity 0.5s linear;
-  cursor: pointer;
-}
-
 .analysis_modal {
-  position: relative;
-  height: 50%;
-  width: 60%;
-  border-radius: 12px;
-  padding: 20px;
-  background-color: rgb(174, 204, 228);
-  cursor: default;
+  display: flex;
+  flex-direction: column;
+  height: 575px;
+  background-color: var(--bg-panel);
+  border-radius: 3px;
+  border: 1px solid var(--border-subtle);
+  overflow-y: auto;
+  box-shadow:
+    rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
+    rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+  scrollbar-width: 1px;
+  width: 300px;
+  color: var(--text-primary);
   font-family: "Ubuntu";
-  font-size: 20px;
-  font-weight: normal;
+  margin: 20px 20px auto 20px;
 }
 
-.analysis_modal__close_btn {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-
-.analysis_modal__close_btn:hover svg {
-  opacity: 60%;
-  transition: opacity 0.4s ease-out;
+.analysis_modal::-webkit-scrollbar {
+  width: 1px;
 }
 
 .analysis_modal__title {
-  text-align: center;
-  margin-bottom: 20px;
-  border-bottom: 1px dotted rgb(40, 40, 40);
+  font-size: 24px;
+  font-family: "Ubuntu";
+  color: var(--text-primary);
+  width: 100%;
+  padding: 10px;
+  border-bottom: 1px solid var(--border-subtle);
 }
 
-.analysis_modal__recommended_fixes {
-  margin: 20px 0 20px 0;
+.change_details_title {
+  font-size: 20px;
+  padding: 5px;
+  width: 70%;
+  padding: 10px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.change_details_list {
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 10px;
+  color: var(--text-secondary);
+}
+
+.mobile_impact_container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 10px;
+}
+
+.mobile_impact_wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.analysis_title,
+.accessibility_notes_title,
+.recommended_fix_title,
+.mobile_impact_title {
+  font-size: 20px;
+  padding: 10px;
+  width: 70%;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.analysis,
+.accessibility_notes,
+.recommended_fix,
+.mobile_impact {
+  color: var(--text-secondary);
+  padding: 8px;
+}
+
+.analysis_container,
+.recommended_fix_container,
+.accessibility_notes_container,
+.mobile_impact_container {
+  border-top: 1px solid var(--border-subtle);
 }

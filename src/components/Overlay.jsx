@@ -3,7 +3,8 @@ import { useEffect, useRef, useState } from "react";
 import "../styles/Overlay.css";
 
 const Overlay = ({ change }) => {
-  const { setHighlightedChange, highlightedChange } = useAppContext();
+  const { setHighlightedChange, highlightedChange, activeChangeId } =
+    useAppContext();
   const overlayRef = useRef(null);
   const [styleState, setStyleState] = useState({
     left: 0,
@@ -48,13 +49,13 @@ const Overlay = ({ change }) => {
     const update = () => {
       const rect = img.getBoundingClientRect();
       const bboxObj = bboxToObject(
-        change.bbox ?? change.box ?? change.boundingBox
+        change.bbox ?? change.box ?? change.boundingBox,
       );
       if (!bboxObj) {
         console.warn(
           "[overlay] invalid bbox for change",
           change.id,
-          change.bbox
+          change.bbox,
         );
         setStyleState({ left: 0, top: 0, width: 0, height: 0, visible: false });
         return;
@@ -63,7 +64,13 @@ const Overlay = ({ change }) => {
       const top = bboxObj.y * rect.height;
       const width = bboxObj.width * rect.width;
       const height = bboxObj.height * rect.height;
-      setStyleState({ left, top, width, height, visible: true });
+
+      // Visible only if bbox is valid and this overlay is either hovered or selected
+      const isSelected = activeChangeId === change.id;
+      const isHovered = highlightedChange === change.id;
+      const visible = isSelected || isHovered;
+
+      setStyleState({ left, top, width, height, visible });
     };
 
     update();
@@ -73,9 +80,11 @@ const Overlay = ({ change }) => {
       window.removeEventListener("resize", update);
       img.removeEventListener("load", update);
     };
-  }, [change]);
+    // include highlightedChange and activeChangeId so overlay visibility recomputes
+  }, [change, highlightedChange, activeChangeId]);
 
   const isActive = highlightedChange === change.id;
+  const isSelected = activeChangeId === change.id;
   const { left, top, width, height, visible } = styleState;
   const impactClass = change.accessibilityImpact
     ? `impact-${String(change.accessibilityImpact).toLowerCase()}`
@@ -84,7 +93,7 @@ const Overlay = ({ change }) => {
   return (
     <div
       ref={overlayRef}
-      className={`overlay ${isActive ? "active" : ""} ${impactClass}`}
+      className={`overlay ${isActive || isSelected ? "active" : ""} ${impactClass}`}
       style={{
         position: "absolute",
         left: `${left}px`,

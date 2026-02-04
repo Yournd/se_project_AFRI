@@ -1,14 +1,28 @@
-.analyze-btn {
-  font-family: "Ubuntu";
-  align-self: center;
-  max-width: 160px;
-  padding: 10px;
-  background-color: rgb(174, 204, 228);
-  border-radius: 8px;
+.analyze-btn_primary {
+  background: linear-gradient(180deg, var(--btn-main), var(--btn-panel));
+  color: var(--text-primary);
+  width: max-content;
+  white-space: nowrap;
   border: none;
+  padding: 5px 8px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 20px;
+
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.1),
+    0 4px 18px rgba(32, 58, 106, 0.35);
+
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
 }
 
-.analyze-btn:hover {
-  background-color: rgb(6, 121, 214);
-  cursor: pointer;
+.analyze-btn_primary:hover {
+  transform: translateY(-1px);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.15),
+    0 10px 26px rgba(86, 109, 151, 0.5);
 }

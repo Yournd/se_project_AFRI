@@ -9,8 +9,7 @@ const mockAnalysis = {
         height: 0.08,
       },
       changeType: "accessibility",
-      description:
-        "Primary CTA text size was reduced, making it harder to read.",
+      label: "Primary CTA text size was reduced, making it harder to read.",
       uxImpact: "Medium",
       accessibilityImpact: "High",
       accessibilityNotes:
@@ -27,8 +26,7 @@ const mockAnalysis = {
         height: 0.12,
       },
       changeType: "color",
-      description:
-        "Secondary button contrast was reduced against the background.",
+      label: "Secondary button contrast was reduced against the background.",
       uxImpact: "Low",
       accessibilityImpact: "Medium",
       accessibilityNotes: "Contrast ratio may not meet WCAG AA requirements.",

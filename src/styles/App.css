@@ -1,3 +1,35 @@
+:root {
+  /* Backgrounds */
+  --bg-app-main: #051224;
+  --bg-app-secondary: #0d151c;
+  --bg-panel: #111827; /* large panels */
+  --bg-card: #1e293b; /* cards / rows */
+
+  /* Borders */
+  --border-subtle: rgba(255, 255, 255, 0.08);
+
+  /* Text */
+  --text-primary: #e5e7eb;
+  --text-secondary: #9ca3af;
+
+  /* Accent */
+  --accent-blue: #3b82f6;
+
+  /* Severity */
+  --risk-high: #ef4444;
+  --risk-medium: #f59e0b;
+  --risk-low: #10b981;
+
+  /* Button styles */
+  --btn-main: #1e2435;
+  --btn-panel: #11131a;
+
+  --btn-accent: #4f8cff;
+  --btn-accent-soft: rgba(79, 140, 255, 0.15);
+
+  --btn-border: rgba(255, 255, 255, 0.1);
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -9,28 +41,15 @@
   align-items: center;
   margin: 0;
   padding: 0;
-  min-width: 100vh;
-  min-height: 100vh;
-  background-color: rgb(40, 40, 43);
-}
-.app__title {
-  margin: 10px 20px;
-}
-
-.app__description {
-  margin-bottom: 15px;
-  width: 600px;
-}
-
-.app__title,
-.app__description {
-  color: rgb(174, 204, 228);
-  font-family: "Ubuntu";
-  text-align: center;
+  background-color: var(--bg-app-main);
 }
 
 .main__content {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  background: var(--bg-app-main)
+    url(../assets/black-white-halftone-background.png) center center / contain
+    repeat;
 }

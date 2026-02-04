@@ -6,7 +6,7 @@ function AnalyzeButton() {
 
   return (
     <button
-      className="analyze-btn"
+      className="analyze-btn_primary"
       onClick={runInspection}
       disabled={!baselineImage || !newImage || status === "analyzing"}
     >

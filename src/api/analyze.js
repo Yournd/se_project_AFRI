@@ -2,7 +2,7 @@ export default function handler(req, res) {
   console.log(
     "[analyze] handler invoked",
     req.method,
-    req.url && req.url.slice ? req.url.slice(0, 200) : req.url
+    req.url && req.url.slice ? req.url.slice(0, 200) : req.url,
   );
 
   if (req.method !== "POST") {
@@ -209,7 +209,7 @@ export default function handler(req, res) {
     if (!parsed || !Array.isArray(parsed.changes)) {
       console.error(
         "[analyze] normalizeAnalysis called with invalid parsed value:",
-        parsed
+        parsed,
       );
       throw new Error("Parsed output missing required 'changes' array");
     }
@@ -219,7 +219,7 @@ export default function handler(req, res) {
         if (!bbox) {
           console.warn(
             "[analyze] dropping change #" + idx + " due to invalid bbox",
-            c
+            c,
           );
           return null; // drop items without usable bbox
         }
@@ -234,7 +234,7 @@ export default function handler(req, res) {
         confidence = Math.min(1, Math.max(0, confidence));
 
         const description = String(
-          c.description ?? c.label ?? c.changeType ?? ""
+          c.description ?? c.label ?? c.changeType ?? "",
         );
         const uxImpact = c.uxImpact ?? c.ux_impact ?? "Low";
         const accessibilityImpact =
@@ -250,8 +250,8 @@ export default function handler(req, res) {
           typeof contrastRatioRaw === "number"
             ? Number(contrastRatioRaw)
             : contrastRatioRaw === "unknown"
-            ? "unknown"
-            : "unknown";
+              ? "unknown"
+              : "unknown";
         const wcagAA_normal_pass =
           c.wcagAA_normal_pass ?? c.wcag_aa_normal_pass ?? false;
         const wcagAA_large_pass =
@@ -294,7 +294,7 @@ export default function handler(req, res) {
           console.warn(
             "[analyze] model omitted fields for change",
             id,
-            missing
+            missing,
           );
         }
         return normalized;
@@ -329,7 +329,7 @@ export default function handler(req, res) {
   const systemInstruction = `Analyze two screenshots (baseline, new) and identify factual visual and UX regressions. Be conservative—do NOT invent issues. Output STRICT JSON only that conforms exactly to the provided schema. Use numeric metrics where possible (e.g., color contrast ratio) and follow WCAG 2.1 thresholds to decide accessibility impact. If you cannot confidently compute a numeric metric, set the field to "unknown" and explain your method in accessibilityNotes. Do not include any text outside the required JSON.`;
 
   // User instruction
-  const userInstruction = `Compare the baseline and new screenshots and return STRICT JSON only. For each detected change, include: id (string), bbox (array [x1,y1,x2,y2] normalized 0..1), label (short phrase), description (short sentence), uxImpact (None|Low|Medium|High), accessibilityImpact (None|Low|Medium|High), contrastRatio (number or "unknown"), wcagAA_normal_pass (boolean), wcagAA_large_pass (boolean), accessibilityNotes (string, explain method and recommended fix), recommendedFixes (string), mobileImpact (None|Low|Medium|High), and confidence (number 0..1). Also return a summary object with: overallRisk (None|Low|Medium|High), totalChanges (number), topChanges (array of up to 3 {id,label,impact,confidence}), and summaryText (short string). Be concise and factual. If uncertain about a metric, set it to "unknown". If there are no changes, return {"changes": []}.`;
+  const userInstruction = `Compare the baseline and new screenshots and return STRICT JSON only. For each detected change, include: id (string), bbox (array [x1,y1,x2,y2] normalized 0..1), label (short phrase), description (short sentence), uxImpact (None|Low|Medium|High), accessibilityImpact (None|Low|Medium|High), contrastRatio (number or "unknown"), wcagAA_normal_pass (boolean), wcagAA_large_pass (boolean), accessibilityNotes (string, explain method and recommended fix), mobileImpact (None|Low|Medium|High), and confidence (number 0..1). Also return a summary object with: overallRisk (None|Low|Medium|High),, recommendedFix (string), totalChanges (number), topChanges (array of up to 3 {id,label,impact,confidence}), and summaryText (short string). Be concise and factual. If uncertain about a metric, set it to "unknown". If there are no changes, return {"changes": []}.`;
 
   // Helpers: parse data URLs (data:<mime>;base64,<data>) or accept raw base64
   function parseDataUri(s) {
@@ -398,7 +398,7 @@ export default function handler(req, res) {
         const showRaw = process.env.NODE_ENV !== "production";
         console.error(
           "[analyze] failed to parse JSON from model:",
-          err.message
+          err.message,
         );
         return res.status(502).json({
           error: "AI returned invalid JSON",

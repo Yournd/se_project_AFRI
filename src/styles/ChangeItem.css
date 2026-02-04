@@ -5,59 +5,66 @@
 }
 
 .change_items {
+  max-width: 250px;
   position: relative;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  background-color: rgb(174, 204, 228);
+  background-color: var(--bg-card);
   border-radius: 8px;
   font-family: "Ubuntu";
-  padding: 20px 25px 20px 25px;
+  padding: 10px;
+}
+
+.change_item__info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.change_item__impact_high,
+.change_item__impact_medium,
+.change_item__impact_low {
+  width: max-content;
+  border-radius: 4px;
+  padding: 4px 8px;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+}
+
+.change_item__impact_high {
+  background-color: var(--risk-high);
+}
+
+.change_item__impact_medium {
+  background-color: var(--risk-medium);
+}
+
+.change_item__impact_low {
+  background-color: var(--risk-low);
+}
+
+.change_item__title {
+  color: var(--text-primary);
+  line-height: 1.5;
+}
+
+.change_item_impacts,
+.change_item {
+  color: var(--text-secondary);
 }
 
 .change_items:hover {
   cursor: pointer;
 }
 
-.change_items__notes {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  width: 40px;
-  height: 40px;
-  background-color: transparent;
-  border-radius: 8px;
+.change_items.impact-high {
+  border-left: 2px solid var(--risk-high);
 }
 
-.change_items__notes:hover {
-  border: 2px solid rgba(28, 28, 28, 0.45);
-  transform: scale(1.03);
-  transition: transform 0.2s linear;
+.change_items.impact-medium {
+  border-left: 2px solid var(--risk-medium);
 }
 
-.change_item__title {
-  font-weight: normal;
-  font-size: 18px;
-  border-bottom: 2px solid black;
-  padding-bottom: 5px;
-  width: 80%;
-}
-
-.change_items.active.impact-high {
-  background-color: rgba(238, 136, 136, 0.7);
-  border: 3px solid rgba(255, 0, 0, 0.9);
-}
-
-.change_items.active.impact-medium {
-  background-color: rgba(246, 225, 157, 0.7);
-  border: 3px solid rgba(255, 196, 0, 0.9);
-}
-
-.change_items.active.impact-low {
-  background-color: rgba(161, 238, 210, 0.7);
-  border: 3px solid rgba(0, 160, 100, 0.9);
-}
-
-.change_items.active {
-  transform: scale(1.05);
+.change_items.impact-low {
+  border-left: 2px solid var(--risk-low);
 }

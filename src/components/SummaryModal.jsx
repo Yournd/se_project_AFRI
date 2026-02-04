@@ -73,7 +73,7 @@ const SummaryModal = () => {
               </li>
               <li className="top_change">
                 <span className="change__label">
-                  Change #3: {summary?.topChanges[2]?.label}
+                  Change #3npm: {summary?.topChanges[2]?.label}
                 </span>
                 <span className="change__impact">
                   Impact: {summary?.topChanges[2]?.impact}

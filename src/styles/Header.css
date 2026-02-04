@@ -1,0 +1,87 @@
+.header__container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-subtle);
+  width: 100%;
+}
+
+.header__logo_container {
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+}
+
+.header__logo_image {
+  width: 50px;
+  height: 50px;
+}
+
+.header__logo {
+  font-family: "Ubuntu";
+  font-weight: normal;
+  font-size: 20px;
+  color: var(--text-primary);
+}
+
+.header__btns {
+  display: flex;
+  justify-content: space-around;
+  gap: 5px;
+  margin-right: 20px;
+}
+
+.header__btn_primary {
+  background: linear-gradient(180deg, var(--btn-main), var(--btn-panel));
+  color: var(--text-primary);
+  white-space: nowrap;
+  border: none;
+  padding: 5px 8px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.1),
+    0 4px 18px rgba(32, 58, 106, 0.35);
+
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.header__btn_primary:hover {
+  transform: translateY(-1px);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.15),
+    0 10px 26px rgba(86, 109, 151, 0.5);
+}
+
+.header__btn_secondary {
+  display: flex;
+  flex-direction: row;
+  gap: 3px;
+  align-items: center;
+  background: transparent;
+  color: var(--btn-accent);
+  border: 1px solid var(--btn-border);
+  padding: 5px 8px;
+  font-size: 0.85rem;
+  border-radius: 4px;
+  cursor: pointer;
+
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.header__btn_secondary:hover {
+  background: var(--btn-accent-soft);
+  border-color: var(--btn-accent);
+}
+
+.github-logo {
+  width: 20px;
+  height: 20px;
+}
