@@ -2,53 +2,54 @@ import { useAppContext } from "../context/AppContext";
 import "../styles/AnalysisNotesModal.css";
 
 const AnalysisNotesModal = () => {
-  const { analysis, activeChange } = useAppContext();
+  const { analysis, activeChange, status } = useAppContext();
 
-  const getMobileImpactColor = (mobileImpact) => {
-    if (mobileImpact === "High") return "#ef4444"; // red
-    if (mobileImpact === "Medium") return "#f59e0b"; // amber
-    if (mobileImpact === "Low") return "#10b981"; // green
-    return "transparent";
-  };
-  return (
-    <div className="analysis_modal">
-      <h3 className="analysis_modal__title">Inspector</h3>
-      <div className="change_details_container">
-        <p className="change_details_title">Change Details</p>
-        <ul className="change_details_list">
-          <li className="change_details_type">Type: {activeChange?.label}</li>
-          <li className="change_details_severity">
-            Severity: {activeChange?.uxImpact}
-          </li>
-          <li className="change_details_confidence">
-            Confidence: {activeChange?.confidence * 100}%
-          </li>
-        </ul>
-        <div className="analysis_container">
-          <p className="analysis_title">Analysis Description</p>
-          <p className="analysis">{activeChange?.description}</p>
-        </div>
-      </div>
-      {activeChange?.recommendedFixes ? (
-        <div className="recommended_fix_container">
-          <p className="recommended_fix_title">Recommended Fix</p>
-          <p className="recommended_fix">{activeChange?.recommendedFixes}</p>
-        </div>
-      ) : (
-        <></>
-      )}
-      {activeChange?.accessibilityNotes ? (
-        <div className="accessibility_notes_container">
-          <p className="accessibility_notes_title">Accessibility Notes</p>
-          <p className="accessibility_notes">
-            {activeChange?.accessibilityNotes}
-          </p>
-        </div>
-      ) : (
-        <></>
-      )}
-      <div className="mobile_impact_container">
-        <p className="mobile_impact_title">Mobile Impact</p>
+  const setLoadText = (type) => {
+    if (status === "idle" && type === "label") {
+      return <li className="change_details_type">Type: pending...</li>;
+    } else if (status === "complete" && type === "label") {
+      return (
+        <li className="change_details_type">Type: {activeChange?.label}</li>
+      );
+    }
+
+    if (status === "idle" && type === "uxImpact") {
+      return <li className="change_details_severity">Severity: pending...</li>;
+    } else if (status === "complete" && type === "uxImpact") {
+      return (
+        <li className="change_details_severity">
+          Severity: {activeChange?.uxImpact}
+        </li>
+      );
+    }
+
+    if (status === "idle" && type === "confidence") {
+      return (
+        <li className="change_details_confidence">Confidence: pending...</li>
+      );
+    } else if (status === "complete" && type === "confidence") {
+      return (
+        <li className="change_details_confidence">
+          Confidence: {activeChange?.confidence * 100}%
+        </li>
+      );
+    }
+
+    if (status === "idle" && type === "description") {
+      return (
+        <p className="analysis">
+          No analysis yet! Try uploading some screenshots of UI before and after
+          recent changes to get results!
+        </p>
+      );
+    } else if (status === "complete" && type === "description") {
+      return <p className="analysis">{activeChange?.description}</p>;
+    }
+
+    if (status === "idle" && type === "mobileImpact") {
+      return <p className="analysis">No data</p>;
+    } else if (status === "complete" && type === "mobileImpact") {
+      return (
         <div className="mobile_impact_wrapper">
           <svg
             width="40px"
@@ -79,6 +80,62 @@ const AnalysisNotesModal = () => {
           </svg>
           <p className="mobile_impact">{activeChange?.mobileImpact}</p>
         </div>
+      );
+    }
+
+    if (status === "analyzing")
+      return <div className="analysis_panel_type_message">Analyzing…</div>;
+
+    if (status === "error")
+      return (
+        <div className="analysis_panel_type_message">
+          Error analyzing images
+        </div>
+      );
+  };
+
+  const getMobileImpactColor = (mobileImpact) => {
+    if (mobileImpact === "High") return "#ef4444"; // red
+    if (mobileImpact === "Medium") return "#f59e0b"; // amber
+    if (mobileImpact === "Low") return "#10b981"; // green
+    return "transparent";
+  };
+  return (
+    <div className="analysis_modal">
+      <h3 className="analysis_modal__title">Inspector</h3>
+      <div className="change_details_container">
+        <p className="change_details_title">Change Details</p>
+        <ul className="change_details_list">
+          {setLoadText("label")}
+          {setLoadText("uxImpact")}
+          {setLoadText("confidence")}
+        </ul>
+        <div className="analysis_container">
+          <p className="analysis_title">Analysis Description</p>
+          {setLoadText("description")}
+        </div>
+      </div>
+      {activeChange?.recommendedFixes ? (
+        <div className="recommended_fix_container">
+          <p className="recommended_fix_title">Recommended Fix</p>
+          <p className="recommended_fix">{activeChange?.recommendedFixes}</p>
+        </div>
+      ) : (
+        <></>
+      )}
+      {activeChange?.accessibilityNotes ? (
+        <div className="accessibility_notes_container">
+          <p className="accessibility_notes_title">Accessibility Notes</p>
+          <p className="accessibility_notes">
+            {activeChange?.accessibilityNotes}
+          </p>
+        </div>
+      ) : (
+        <></>
+      )}
+      <div className="mobile_impact_container">
+        <p className="mobile_impact_title">Mobile Impact</p>
+        {setLoadText("mobileImpact")}
       </div>
     </div>
   );
