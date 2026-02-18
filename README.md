@@ -84,7 +84,7 @@ All production Gemini API calls originate **server-side only**.
 
 The application starts in a neutral inspection state, allowing users to upload a baseline image and a new image for comparison.
 
-![Initial state before images are uploaded](./docs/images/before-upload.png)
+![Initial state before images are uploaded](./docs/images/before_upload.png)
 
 ---
 
