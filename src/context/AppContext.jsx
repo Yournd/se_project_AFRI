@@ -1,8 +1,6 @@
 import { createContext, useContext, useState } from "react";
-import { useEffect } from "react";
 
 import mockAnalysis from "../mocks/mockAnalysis";
-import test from "node:test";
 
 const USE_MOCK_ANALYSIS = false;
 
@@ -16,7 +14,9 @@ export const AppProvider = ({ children }) => {
   const [analysis, setAnalysis] = useState(
     USE_MOCK_ANALYSIS ? mockAnalysis : null,
   );
-  const [status, setStatus] = useState(USE_MOCK_ANALYSIS ? "complete" : "idle"); // idle | analyzing | complete | error
+  const [status, setStatus] = useState(
+    USE_MOCK_ANALYSIS ? "complete" : "analyzing",
+  ); // idle | analyzing | complete | error
   const [highlightedChange, setHighlightedChange] = useState(null);
   const [viewer, setViewer] = useState({ zoom: 1, offsetX: 0, offsetY: 0 });
 

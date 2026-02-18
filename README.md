@@ -100,7 +100,7 @@ Once both images are provided, AFRI sends them to the server-side Gemini integra
 
 After the API returns, detected changes are highlighted directly on the image using bounding boxes. A structured summary below the images describes each change, including UX impact, accessibility impact, and confidence scores.
 
-![Analysis results with highlighted changes and summaries](./docs/images/analysis-results.png)
+![Analysis results with highlighted changes and summaries](./docs/images/results_screen.png)
 
 ---
 

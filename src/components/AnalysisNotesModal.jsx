@@ -2,7 +2,11 @@ import { useAppContext } from "../context/AppContext";
 import "../styles/AnalysisNotesModal.css";
 
 const AnalysisNotesModal = () => {
-  const { analysis, activeChange, status } = useAppContext();
+  const { activeChange, setActiveChangeId, changes, status } = useAppContext();
+
+  if (activeChange === undefined) {
+    setActiveChangeId(changes[0]?.id);
+  }
 
   const setLoadText = (type) => {
     if (status === "idle" && type === "label") {
@@ -10,6 +14,12 @@ const AnalysisNotesModal = () => {
     } else if (status === "complete" && type === "label") {
       return (
         <li className="change_details_type">Type: {activeChange?.label}</li>
+      );
+    } else if (status === "analyzing" && type === "label") {
+      return (
+        <li className="change_details_type">
+          Type: Analyzing each changes type...
+        </li>
       );
     }
 
@@ -19,6 +29,12 @@ const AnalysisNotesModal = () => {
       return (
         <li className="change_details_severity">
           Severity: {activeChange?.uxImpact}
+        </li>
+      );
+    } else if (status === "analyzing" && type === "uxImpact") {
+      return (
+        <li className="change_details_severity">
+          Severity: Assessing the severity of changes...
         </li>
       );
     }
@@ -33,6 +49,12 @@ const AnalysisNotesModal = () => {
           Confidence: {activeChange?.confidence * 100}%
         </li>
       );
+    } else if (status === "analyzing" && type === "confidence") {
+      return (
+        <li className="change_details_confidence">
+          Confidence: Adjusting confidence levels...
+        </li>
+      );
     }
 
     if (status === "idle" && type === "description") {
@@ -44,6 +66,10 @@ const AnalysisNotesModal = () => {
       );
     } else if (status === "complete" && type === "description") {
       return <p className="analysis">{activeChange?.description}</p>;
+    } else if (status === "analyzing" && type === "description") {
+      return (
+        <p className="analysis">Fetching individual change assessments...</p>
+      );
     }
 
     if (status === "idle" && type === "mobileImpact") {
@@ -81,11 +107,9 @@ const AnalysisNotesModal = () => {
           <p className="mobile_impact">{activeChange?.mobileImpact}</p>
         </div>
       );
+    } else if (status === "analyzing" && type === "mobileImpact") {
+      return <p className="mobile_impact">Testing mobile features...</p>;
     }
-
-    if (status === "analyzing")
-      return <div className="analysis_panel_type_message">Analyzing…</div>;
-
     if (status === "error")
       return (
         <div className="analysis_panel_type_message">

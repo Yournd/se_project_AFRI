@@ -1,8 +1,8 @@
 .analysis_panel__container {
   display: flex;
   flex-direction: column;
-  height: 575px;
-  width: 250px;
+  height: 80%;
+  width: 20%;
   background-color: var(--bg-panel);
   border-radius: 3px;
   padding: 0 10px 0 10px;
@@ -12,7 +12,7 @@
     rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
     rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
   scrollbar-width: 1px;
-  margin: 20px 20px 40px 20px;
+  margin-left: 20px;
 }
 
 .analysis_panel__container::-webkit-scrollbar {

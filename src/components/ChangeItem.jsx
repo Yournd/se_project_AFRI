@@ -1,5 +1,4 @@
 import { useAppContext } from "../context/AppContext";
-import notesIcon from "../assets/notes_image.svg";
 import "../styles/ChangeItem.css";
 
 const ChangeItem = ({ change }) => {

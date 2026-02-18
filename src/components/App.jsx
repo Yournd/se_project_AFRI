@@ -5,7 +5,6 @@ import Header from "./Header";
 import ImageCompareViewer from "./ImageCompareViewer";
 import AnalysisPanel from "./AnalysisPanel";
 import AnalysisNotesModal from "./AnalysisNotesModal";
-import SummaryModal from "./SummaryModal";
 
 const App = () => {
   useEffect(() => {
@@ -31,7 +30,6 @@ const App = () => {
           <AnalysisPanel />
           <ImageCompareViewer />
           <AnalysisNotesModal />
-          <SummaryModal />
         </div>
       </div>
     </AppProvider>

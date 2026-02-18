@@ -1,10 +1,9 @@
 import { useAppContext } from "../context/AppContext";
 import ChangeItem from "./ChangeItem";
 import "../styles/AnalysisPanel.css";
-import aiImage from "../assets/undraw_artificial-intelligence.svg";
 
 const AnalysisPanel = () => {
-  const { changes, status, setActiveChangeId } = useAppContext();
+  const { changes, status } = useAppContext();
 
   const setLoadText = (status) => {
     if (status === "idle")

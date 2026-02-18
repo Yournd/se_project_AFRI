@@ -1,10 +1,12 @@
-import { useAppContext } from "../context/AppContext";
 import "../styles/Header.css";
 import logoImage from "../assets/ai-logo_image.svg";
-import gitHubLogo from "../assets/github-mark-white.svg";
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import MyDocument from "./MyDocument";
+import { useAppContext } from "../context/AppContext";
 
 const Header = () => {
-  const { openActiveModal } = useAppContext();
+  const { changes } = useAppContext();
+
   return (
     <div className="header__container">
       <div className="header__logo_container">
@@ -12,15 +14,13 @@ const Header = () => {
         <h1 className="header__logo">AI Frontend Regression Inspector</h1>
       </div>
       <div className="header__btns">
-        <button
+        <PDFDownloadLink
           className="header__btn_primary"
-          onClick={() => {
-            openActiveModal("summary");
-          }}
+          document={<MyDocument data={changes} />}
+          fileName="analysis_report.pdf"
         >
-          Full Summary
-        </button>
-        <button className="header__btn_secondary">Export Report</button>
+          {({ loading }) => (loading ? "Loading document..." : "Download PDF")}
+        </PDFDownloadLink>
       </div>
     </div>
   );

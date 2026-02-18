@@ -132,11 +132,6 @@ const ImageCompareViewer = () => {
 
   return (
     <div className="viewer__container">
-      <div className="viewer__upload_container">
-        <div className="upload__container">Baseline Image</div>
-        <div className="upload__container">New Image</div>
-      </div>
-
       <div className="viewer__images_container">
         {renderDropZone({
           type: "baseline",
